@@ -9,7 +9,7 @@ import org.junit.Test;
  */
 public class ObjectPlusTest {
     @Test
-    public void testNullCheck(){
+    public void testRequireCheck(){
         Assert.assertTrue(ObjectPlus.allNonNull("adas",23,56.2));
         Assert.assertTrue(ObjectPlus.allNull(null, null, null));
         Assert.assertTrue(ObjectPlus.containNullAndNonNull(null,"sda"));
@@ -17,6 +17,9 @@ public class ObjectPlusTest {
         Assert.assertFalse(ObjectPlus.containNullAndNonNull(23,"dssad"));
         ObjectPlus.requireAllNonNull("dada","ss",45);
         ObjectPlus.requireNotAllNull(null,23,"sds");
+        int state=3;
+        state++;
+        ObjectPlus.argumentRequire(state==4,"only allow 4 in state.");
     }
     @Test
     public void testJoin(){
