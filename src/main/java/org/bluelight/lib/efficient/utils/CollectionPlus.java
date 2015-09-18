@@ -193,4 +193,10 @@ public class CollectionPlus {
         }
         return before-collection.size();
     }
+    public static <E> boolean isEmpty(E[] array){
+        return array==null || array.length==0;
+    }
+    public static <E> boolean isNotEmpty(E[] array){
+        return !isEmpty(array);
+    }
 }
