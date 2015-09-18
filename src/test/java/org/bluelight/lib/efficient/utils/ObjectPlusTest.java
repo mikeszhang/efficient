@@ -1,5 +1,6 @@
 package org.bluelight.lib.efficient.utils;
 
+import com.google.common.primitives.Ints;
 import org.junit.Assert;
 import org.junit.Test;
 

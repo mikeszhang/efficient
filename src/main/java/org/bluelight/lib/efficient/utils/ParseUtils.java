@@ -100,22 +100,37 @@ public class ParseUtils {
         return list;
     }
     public static int parseInt(String value, int defaultValue){
+        if (value == null){
+            return defaultValue;
+        }
         Integer res=Ints.tryParse(value);
         return res==null?defaultValue:res;
     }
     public static boolean parseBoolean(String value, boolean defaultValue){
+        if (value == null){
+            return defaultValue;
+        }
         Boolean res=tryParseBoolean(value);
         return res==null?defaultValue:res;
     }
     public static float parseFloat(String value, float defaultValue){
+        if (value == null){
+            return defaultValue;
+        }
         Float res= Floats.tryParse(value);
         return res==null?defaultValue:res;
     }
     public static double parseDouble(String value, double defaultValue){
+        if (value == null){
+            return defaultValue;
+        }
         Double res= Doubles.tryParse(value);
         return res==null?defaultValue:res;
     }
     public static long parseLong(String value, long defaultValue){
+        if (value == null){
+            return defaultValue;
+        }
         Long res= Longs.tryParse(value);
         return res==null?defaultValue:res;
     }
