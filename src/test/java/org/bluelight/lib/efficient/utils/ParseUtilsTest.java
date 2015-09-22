@@ -23,5 +23,6 @@ public class ParseUtilsTest {
         Object data=ParseUtils.parseScalar("17.6");
         Assert.assertTrue(data instanceof Float);
         Assert.assertEquals(17.6f,data);
+        Assert.assertNull(ParseUtils.parseInt("asd",null));
     }
 }

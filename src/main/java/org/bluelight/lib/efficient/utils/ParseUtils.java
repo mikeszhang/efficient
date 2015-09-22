@@ -99,35 +99,35 @@ public class ParseUtils {
         }
         return list;
     }
-    public static int parseInt(String value, int defaultValue){
+    public static Integer parseInt(String value, Integer defaultValue){
         if (value == null){
             return defaultValue;
         }
         Integer res=Ints.tryParse(value);
         return res==null?defaultValue:res;
     }
-    public static boolean parseBoolean(String value, boolean defaultValue){
+    public static Boolean parseBoolean(String value, Boolean defaultValue){
         if (value == null){
             return defaultValue;
         }
         Boolean res=tryParseBoolean(value);
         return res==null?defaultValue:res;
     }
-    public static float parseFloat(String value, float defaultValue){
+    public static Float parseFloat(String value, Float defaultValue){
         if (value == null){
             return defaultValue;
         }
         Float res= Floats.tryParse(value);
         return res==null?defaultValue:res;
     }
-    public static double parseDouble(String value, double defaultValue){
+    public static Double parseDouble(String value, Double defaultValue){
         if (value == null){
             return defaultValue;
         }
         Double res= Doubles.tryParse(value);
         return res==null?defaultValue:res;
     }
-    public static long parseLong(String value, long defaultValue){
+    public static Long parseLong(String value, Long defaultValue){
         if (value == null){
             return defaultValue;
         }
@@ -164,6 +164,9 @@ public class ParseUtils {
      * return original string value if parse failed.
      * */
     public static Object parseScalar(String value){
+        if (value == null){
+            return value;
+        }
         Object res=Ints.tryParse(value);
         if (res!=null){
             return res;
