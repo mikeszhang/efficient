@@ -1,6 +1,7 @@
 package org.bluelight.lib.efficient.utils;
 
 import org.apache.commons.collections4.Bag;
+import org.apache.commons.collections4.Predicate;
 import org.apache.commons.collections4.bag.HashBag;
 import org.bluelight.lib.efficient.constraint.NotNull;
 import org.bluelight.lib.efficient.utils.funcs.ElementProcessor;
@@ -21,21 +22,17 @@ public class CollectionPlus {
         Collections.addAll(set, array);
         return set;
     }
-    public static <K,V> Map<K,V> asMap(K key, V value){
-        Map<K,V> map=new HashMap<K, V>();
-        map.put(key, value);
-        return map;
+    public static <I> Set<I> asSet(Iterable<I> iterable){
+        if (iterable==null){
+            return null;
+        }
+        Set<I> set=new HashSet<I>();
+        for (I el: iterable){
+            set.add(el);
+        }
+        return set;
     }
-    public static <K,V> Map<K,V> asMap(K key1, V value1, K key2, V value2){
-        Map<K,V> map=asMap(key1,value1);
-        map.put(key2,value2);
-        return map;
-    }
-    public static <K,V> Map<K,V> asMap(K key1, V value1, K key2, V value2, K key3, V value3){
-        Map<K,V> map=asMap(key1,value1,key2,value2);
-        map.put(key3,value3);
-        return map;
-    }
+
     public static <T> T[] toArray(Class<T> clazz, Collection<? extends T> collection){
         if (collection==null){
             return null;
@@ -130,23 +127,7 @@ public class CollectionPlus {
         }
         return set;
     }
-    public static <I> Set<I> asSet(Iterable<I> iterable){
-        if (iterable==null){
-            return null;
-        }
-        Set<I> set=new HashSet<I>();
-        for (I el: iterable){
-            set.add(el);
-        }
-        return set;
-    }
-    public static <K,E,V> BucketHashMap<K,E> map(Collection<V> collection, Mapper<K,E,V> mapper){
-        BucketHashMap<K,E> bucketHashMap=new BucketHashMap<K, E>();
-        for (V value: collection){
-            bucketHashMap.append(mapper.map(value));
-        }
-        return bucketHashMap;
-    }
+
     public static <K,V> BagMapAdaptor<K> count(Collection<V> collection, Mapper<K,Integer,V> mapper){
         Bag<K> bag=new HashBag<K>();
         for (V value: collection){
@@ -157,13 +138,15 @@ public class CollectionPlus {
         }
         return new BagMapAdaptor<K>(bag);
     }
-    public static <K,V> boolean putIfNotNull(@NotNull Map<K,V> map, K key, V value){
-        if (key==null || value==null){
-            return false;
+
+    public static <E> boolean addIf(@NotNull Collection<E> collection, E value, Predicate<E> predicate){
+        if (predicate.evaluate(value)){
+            collection.add(value);
+            return true;
         }
-        map.put(key,value);
-        return true;
+        return false;
     }
+
     public static <E> boolean addIfNotNull(@NotNull Collection<E> collection, E value){
         if (value==null){
             return false;
@@ -171,18 +154,7 @@ public class CollectionPlus {
         collection.add(value);
         return true;
     }
-    public static <K,V> int trimNull(@NotNull Map<K,V> map){
-        int before=map.size();
-        Set<Map.Entry<K,V>> entrySet = map.entrySet();
-        Iterator<Map.Entry<K,V>> iterator=entrySet.iterator();
-        while (iterator.hasNext()){
-            Map.Entry<K,V> entry=iterator.next();
-            if (entry.getKey()==null || entry.getValue()==null){
-                iterator.remove();
-            }
-        }
-        return before-map.size();
-    }
+
     public static <E> int trimNull(@NotNull Collection<E> collection){
         int before=collection.size();
         Iterator<E> iterator=collection.iterator();

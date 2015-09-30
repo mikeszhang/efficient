@@ -46,17 +46,6 @@ public class ObjectPlus {
         return !allNull(objs) && !allNonNull(objs);
     }
 
-    public static String join(@NotNull String separator, Object... objs){
-        StringBuilder sb=new StringBuilder();
-        for (Object obj: objs){
-            sb.append(obj).append(separator);
-        }
-        if (objs.length>0) {
-            sb.deleteCharAt(sb.length() - separator.length());
-        }
-        return sb.toString();
-    }
-
     public static void argumentRequire(boolean condition, String msg){
         if (!condition){
             throw new IllegalArgumentException(msg);

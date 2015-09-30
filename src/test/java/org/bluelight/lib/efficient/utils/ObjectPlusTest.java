@@ -25,15 +25,10 @@ public class ObjectPlusTest {
         ObjectPlus.argumentRequire(state==4,"only allow 4 in state.");
         ObjectPlus.requireNotEmpty(Arrays.asList(12), "is not empty");
         ObjectPlus.requireNotBlank(" s", "not blank");
-        ObjectPlus.requireNotEmpty(CollectionPlus.asMap(12,22), "map is not empty");
+        ObjectPlus.requireNotEmpty(MapPlus.asMap(12,22), "map is not empty");
         ObjectPlus.requireNotEmpty(new String[1], "array is 1");
     }
-    @Test
-    public void testJoin(){
-        Assert.assertEquals("mikes-john",ObjectPlus.join("-","mikes","john"));
-        Assert.assertEquals("mikes",ObjectPlus.join("-","mikes"));
-        Assert.assertEquals("",ObjectPlus.join("-"));
-    }
+
     @Test(expected = IllegalArgumentException.class)
     public void testRequireFailed(){
         ObjectPlus.requireNotEmpty(new String[0], "is empty");

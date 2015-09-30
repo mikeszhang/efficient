@@ -28,7 +28,7 @@ public class CollectionPlusTest {
             }
         });
         Assert.assertEquals("sda0ppl1add2",result);
-        Map<String,Integer> moneyMap=CollectionPlus.asMap("mikes",100,"jack",400,"woods",1000);
+        Map<String,Integer> moneyMap=MapPlus.asMap("mikes",100,"jack",400,"woods",1000);
         Integer total=CollectionPlus.foreach(moneyMap, 0, new KVProcessor<String, Integer, Integer>() {
             @Override
             public Integer process(String key, Integer value, Integer state) {
@@ -50,26 +50,13 @@ public class CollectionPlusTest {
         BagMapAdaptor<String> bagMapAdaptor=CollectionPlus.count(recordList, new Mapper<String, Integer, Pair<Integer, String>>() {
             @Override
             public Map<String, Integer> map(Pair<Integer, String> element) {
-                return CollectionPlus.asMap(element.getRight(),1);
+                return MapPlus.asMap(element.getRight(),1);
             }
         });
         Assert.assertEquals(Integer.valueOf(2), bagMapAdaptor.get("mikes"));
         Assert.assertEquals(Integer.valueOf(1), bagMapAdaptor.get("jack"));
     }
-    @Test
-    public void testMapNull(){
-        Map<String,String> map=new HashMap<String, String>();
-        boolean a=CollectionPlus.putIfNotNull(map,"mikes","sda");
-        boolean b=CollectionPlus.putIfNotNull(map,"ken",null);
-        Assert.assertTrue(a);
-        Assert.assertFalse(b);
-        Assert.assertEquals(1,map.size());
-        map.put("jack",null);
-        map.put("coll",null);
-        Assert.assertEquals(3,map.size());
-        CollectionPlus.trimNull(map);
-        Assert.assertEquals(1,map.size());
-    }
+
     @Test
     public void testCollectionNull(){
         List<String> list=new ArrayList<String>();

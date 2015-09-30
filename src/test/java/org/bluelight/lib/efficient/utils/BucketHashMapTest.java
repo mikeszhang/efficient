@@ -30,10 +30,10 @@ public class BucketHashMapTest {
     @Test
     public void testMapReduce() throws IOException {
         List<String> words= Arrays.asList("the","world","is","a","fuck","world");
-        BucketHashMap<String,Integer> bucketHashMap=CollectionPlus.map(words, new Mapper<String, Integer, String>() {
+        BucketHashMap<String,Integer> bucketHashMap=MapPlus.map(words, new Mapper<String, Integer, String>() {
             @Override
             public Map<String, Integer> map(String element) {
-                return CollectionPlus.asMap(element,1);
+                return MapPlus.asMap(element,1);
             }
         });
         Map<String,Integer> result=bucketHashMap.reduce(new Reducer<Integer, String, Integer>() {
